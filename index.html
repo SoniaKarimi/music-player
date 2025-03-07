@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گرامافون موزیکال</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+        }
+        .gramophone {
+            width: 200px;
+            height: 200px;
+            background: url('https://github.com/SoniaKarimi/Gramophone-Player/blob/main/1180x1200-removebg-preview.png?raw=true') no-repeat center;
+            background-size: cover;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+        .playing {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gramophone" id="gramophone"></div>
+    <audio id="music">
+        <source src="https://github.com/SoniaKarimi/music-player/raw/refs/heads/main/03_matilda.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        const gramophone = document.getElementById('gramophone');
+        const music = document.getElementById('music');
+
+        gramophone.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                gramophone.classList.add('playing');
+            } else {
+                music.pause();
+                gramophone.classList.remove('playing');
+            }
+        });
+    </script>
+</body>
+</html>
