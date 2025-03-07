@@ -3,14 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>گرامافون موزیکال</title>
+    <title>گرامافون موزیک پلیر</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         body {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
-            background-color: #222;
+            background: linear-gradient(135deg, #4B0082, #87CEFA);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
         }
         .gramophone {
             width: 200px;
@@ -28,16 +38,35 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        .progress-container {
+            width: 80%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-top: 20px;
+            position: relative;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #ffcc00;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <h2>Only For You ❤️</h2>
     <div class="gramophone" id="gramophone"></div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
     <audio id="music">
         <source src="https://github.com/SoniaKarimi/music-player/raw/refs/heads/main/03_matilda.mp3" type="audio/mpeg">
     </audio>
     <script>
         const gramophone = document.getElementById('gramophone');
         const music = document.getElementById('music');
+        const progressBar = document.getElementById('progress-bar');
 
         gramophone.addEventListener('click', () => {
             if (music.paused) {
@@ -47,6 +76,11 @@
                 music.pause();
                 gramophone.classList.remove('playing');
             }
+        });
+
+        music.addEventListener('timeupdate', () => {
+            const progress = (music.currentTime / music.duration) * 100;
+            progressBar.style.width = progress + '%';
         });
     </script>
 </body>
